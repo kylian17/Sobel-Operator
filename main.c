@@ -42,11 +42,11 @@ int main(void)
 	  if (CAM_FrameReady()==1){
 	  CAM_GetGrayscale(grey_image);
 	  }
-	  for(uint8_t y= 0;(y < CAM_FrameHeight()-2);y++){
-		  for(uint8_t x = 0; (x < CAM_FrameWidth() - 2); x++){
-			  grey_image_sobel_x[y][x] = Sobel_operation_x(grey_image[y][x],grey_image[y][x+1],grey_image[y][x+2],grey_image[y+1][x],grey_image[y+1][x+1],grey_image[y+1][x+2],grey_image[y+2][x],grey_image[y+2][x+1],grey_image[y+2][x+2]);
-			  grey_image_sobel_y[y][x] = Sobel_operation_y(grey_image[y][x],grey_image[y][x+1],grey_image[y][x+2],grey_image[y+1][x],grey_image[y+1][x+1],grey_image[y+1][x+2],grey_image[y+2][x],grey_image[y+2][x+1],grey_image[y+2][x+2]);
-			  grey_image_sobel[y][x] = sqrt(grey_image_sobel_x[y][x]*grey_image_sobel_x[y][x]+grey_image_sobel_y[y][x]*grey_image_sobel_y[y][x]);
+	  for(uint8_t y= 1;(y < CAM_FrameHeight() - 1);y++){
+		  for(uint8_t x = 1; (x < CAM_FrameWidth() - 1); x++){
+			  grey_image_sobel_x[y][x] = Sobel_operation_x(grey_image[y-1][x-1],grey_image[y-1][x],grey_image[y-1][x+1],grey_image[y][x-1],grey_image[y][x],grey_image[y][x+1],grey_image[y-1][x-1],grey_image[y-1][x],grey_image[y-1][x+1]);
+			  grey_image_sobel_y[y][x] = Sobel_operation_y(grey_image[y-1][x-1],grey_image[y-1][x],grey_image[y-1][x+1],grey_image[y][x-1],grey_image[y][x],grey_image[y][x+1],grey_image[y-1][x-1],grey_image[y-1][x],grey_image[y-1][x+1]);
+			  grey_image_sobel[y-1][x-1] = sqrt(grey_image_sobel_x[y-1][x-1]*grey_image_sobel_x[y-1][x-1]+grey_image_sobel_y[y-1][x-1]*grey_image_sobel_y[y-1][x-1]);
 			  if(grey_image_sobel[y][x]>123){
 				  grey_image_sobel[y][x] = 255;
 			  }
