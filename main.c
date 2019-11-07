@@ -46,7 +46,13 @@ int main(void)
 		  for(uint8_t x = 0; (x < CAM_FrameWidth() - 2); x++){
 			  grey_image_sobel_x[y][x] = Sobel_operation_x(grey_image[y][x],grey_image[y][x+1],grey_image[y][x+2],grey_image[y+1][x],grey_image[y+1][x+1],grey_image[y+1][x+2],grey_image[y+2][x],grey_image[y+2][x+1],grey_image[y+2][x+2]);
 			  grey_image_sobel_y[y][x] = Sobel_operation_y(grey_image[y][x],grey_image[y][x+1],grey_image[y][x+2],grey_image[y+1][x],grey_image[y+1][x+1],grey_image[y+1][x+2],grey_image[y+2][x],grey_image[y+2][x+1],grey_image[y+2][x+2]);
-			  grey_image_sobel[y][x] = grey_image_sobel_x[y][x]*grey_image_sobel_x[y][x]+grey_image_sobel_y[y][x]*grey_image_sobel_y[y][x];
+			  grey_image_sobel[y][x] = sqrt(grey_image_sobel_x[y][x]*grey_image_sobel_x[y][x]+grey_image_sobel_y[y][x]*grey_image_sobel_y[y][x]);
+			  if(grey_image_sobel[y][x]>123){
+				  grey_image_sobel[y][x] = 255;
+			  }
+			  else{
+				  grey_image_sobel[y][x] = 0;
+			  }
 		  }
 	  }
 	  CAM_GreyToRGB565(grey_image_sobel, rgb_image);
