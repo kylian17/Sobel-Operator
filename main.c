@@ -10,11 +10,11 @@
 #include "camera.h"
 #include <math.h>
 const int sobel_operator_x[3][3] = {{1,0,-1},
-				    {1,0,-1},
+				    {2,0,-2},
 			            {1,0,-1}};
-const int sobel_operator_y[3][3] = {{1,1,1},
+const int sobel_operator_y[3][3] = {{1,2,1},
 				    {0,0,0},
-				    {-1,-1,-1}};
+				    {-1,-2,-1}};
 uint8_t Sobel_operation_x(uint8_t top_left,uint8_t top,uint8_t top_right,uint8_t left,uint8_t mid,uint8_t right,uint8_t bottom_left,uint8_t bottom,uint8_t bottom_right){
 	uint8_t output = top_left * sobel_operator_x[0][0]+top * sobel_operator_x[0][1]+top_right * sobel_operator_x[0][2]+left * sobel_operator_x[1][0]+mid * sobel_operator_x[1][1]+right * sobel_operator_x[1][2]+bottom_left * sobel_operator_x[2][0]+bottom * sobel_operator_x[2][1]+bottom_right * sobel_operator_x[2][2];
 	return output;
